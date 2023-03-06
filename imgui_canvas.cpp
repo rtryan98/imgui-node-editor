@@ -115,9 +115,10 @@ bool ImGuiEx::Canvas::Begin(ImGuiID id, const ImVec2& size)
 
     // #debug: Canvas content.
     //m_DrawList->AddRectFilled(m_StartPos, m_StartPos + m_CurrentSize, IM_COL32(0, 0, 0, 64));
-    //m_DrawList->AddRect(m_WidgetRect.Min, m_WidgetRect.Max, IM_COL32(255, 0, 255, 64));
+    m_DrawList->AddRect(m_WidgetRect.Min, m_WidgetRect.Max, IM_COL32(255, 0, 255, 64));
 
     ImGui::SetCursorScreenPos(ImVec2(0.0f, 0.0f));
+    ImGui::Dummy(ImVec2(0.0f, 0.0f));
 
 # if IMGUI_EX_CANVAS_DEFERED()
     m_Ranges.resize(0);
@@ -133,9 +134,11 @@ bool ImGuiEx::Canvas::Begin(ImGuiID id, const ImVec2& size)
 
     // Emit dummy widget matching bounds of the canvas.
     ImGui::SetCursorScreenPos(m_ViewRect.Min);
+    ImGui::Dummy(ImVec2(0.0f, 0.0f));
     ImGui::Dummy(m_ViewRect.GetSize());
 
     ImGui::SetCursorScreenPos(ImVec2(0.0f, 0.0f));
+    ImGui::Dummy(ImVec2(0.0f, 0.0f));
 
     m_InBeginEnd = true;
 
@@ -166,6 +169,7 @@ void ImGuiEx::Canvas::End()
 
     // Emit dummy widget matching bounds of the canvas.
     ImGui::SetCursorScreenPos(m_WidgetPosition);
+    ImGui::Dummy(ImVec2(0.0f, 0.0f));
     ImGui::Dummy(m_WidgetSize);
 
     // #debug: Rect around canvas. Content should be inside these bounds.
